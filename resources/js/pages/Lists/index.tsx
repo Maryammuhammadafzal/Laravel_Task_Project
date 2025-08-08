@@ -1,7 +1,10 @@
+import { Button } from "@/components/ui/button";
+import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
-import { CheckCircle2, XCircle } from "lucide-react";
+import { Dialog } from "@radix-ui/react-dialog";
+import { CheckCircle2, Plus, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -106,13 +109,30 @@ export default function ListsIndex({ lists, flash }: Props) {
                                 (
                                     <XCircle className="h-5 w-5" />
                                 )}
-                                <span>{toastMessage}</span>
+                            <span>{toastMessage}</span>
                         </div>
                     )
                 }
 
                 <div className="flex justify-between items-center">
-                    <h1 className="text-2xl"></h1>
+                    <h1 className="text-2xl font-bold">Lists</h1>
+                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                        <DialogTrigger asChild>
+                            <Button>
+                                <Plus className="h-4 w-4 mr-2" />
+                                New List
+                            </Button>
+                        </DialogTrigger>
+                        <DialogContent>
+                            <DialogHeader>
+                                <DialogTitle>
+                                    {editingList? 'Edit List': ' Create New List'}
+                                </DialogTitle>
+                            </DialogHeader>
+
+                            <form onSubmit={handleSubmit} className=""></form>
+                        </DialogContent>
+                    </Dialog>
                 </div>
             </div>
         </AppLayout>
