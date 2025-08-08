@@ -95,7 +95,7 @@ export default function ListsIndex({ lists, flash }: Props) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Lists" />
-            <div></div>
+            <div className="flex"></div>
         </AppLayout>
     )
 }
