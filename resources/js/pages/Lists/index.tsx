@@ -1,5 +1,6 @@
+import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
-import { useForm } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 
@@ -90,4 +91,11 @@ export default function ListsIndex({ lists, flash }: Props) {
     const handleDelete = (listId: number) => {
         destroy(route('lists.destroy', listId));
     };
+
+    return (
+        <AppLayout breadcrumbs={breadcrumbs}>
+            <Head title="Lists" />
+            <div></div>
+        </AppLayout>
+    )
 }
