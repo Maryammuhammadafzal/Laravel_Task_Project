@@ -106,9 +106,14 @@ export default function ListsIndex({ lists, flash }: Props) {
                                 (
                                     <XCircle className="h-5 w-5" />
                                 )}
+                                <span>{toastMessage}</span>
                         </div>
                     )
                 }
+
+                <div className="flex justify-between items-center">
+                    <h1 className="text-2xl"></h1>
+                </div>
             </div>
         </AppLayout>
     )
