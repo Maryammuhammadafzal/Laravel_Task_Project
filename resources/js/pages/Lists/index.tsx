@@ -53,8 +53,8 @@ export default function ListsIndex({ lists, flash }: Props) {
         }
     }, [showToast]);
 
-    const { data, setData, post, put, processing, reset, delete: destroy} = useForm({
-        title : '',
+    const { data, setData, post, put, processing, reset, delete: destroy } = useForm({
+        title: '',
         description: '',
     });
 
@@ -62,7 +62,18 @@ export default function ListsIndex({ lists, flash }: Props) {
         e.preventDefault();
         if (editingList) {
             put(route('lists.update', editingList.id), {
-                
+                onSuccess: () => {
+                    setIsOpen(false);
+                    reset();
+                    setEditingList(null);
+                }
+            })
+        } else {
+            put(route('lists.store'), {
+                onSuccess: () => {
+                    setIsOpen(false);
+                    reset();
+                }
             })
         }
     }
