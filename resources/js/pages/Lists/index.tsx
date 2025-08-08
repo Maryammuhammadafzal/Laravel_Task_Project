@@ -139,12 +139,15 @@ export default function ListsIndex({ lists, flash }: Props) {
                                </div>
                                <div className="space-y-2">
                                  <Label htmlFor="description">Description</Label>
-                                <Input id="description" value={data.description} onChange={(e) => setData('title', e.target.value)} required />
+                                <Input id="description" value={data.description} onChange={(e) => setData('description', e.target.value)} required />
                                </div>
+                               <Button type="submit" disabled={processing}>{editingList? 'Update': 'Create'}</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
                 </div>
+
+                <div className=""></div>
             </div>
         </AppLayout>
     )
