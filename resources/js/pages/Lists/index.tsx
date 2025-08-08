@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
@@ -126,11 +128,20 @@ export default function ListsIndex({ lists, flash }: Props) {
                         <DialogContent>
                             <DialogHeader>
                                 <DialogTitle>
-                                    {editingList? 'Edit List': ' Create New List'}
+                                    {editingList ? 'Edit List' : ' Create New List'}
                                 </DialogTitle>
                             </DialogHeader>
 
-                            <form onSubmit={handleSubmit} className=""></form>
+                            <form onSubmit={handleSubmit} className="space-y-2">
+                               <div className="space-y-2">
+                                 <Label htmlFor="title">Title</Label>
+                                <Input id="title" value={data.title} onChange={(e) => setData('title', e.target.value)} required />
+                               </div>
+                               <div className="space-y-2">
+                                 <Label htmlFor="description">Description</Label>
+                                <Input id="description" value={data.description} onChange={(e) => setData('title', e.target.value)} required />
+                               </div>
+                            </form>
                         </DialogContent>
                     </Dialog>
                 </div>
