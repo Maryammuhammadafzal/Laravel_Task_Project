@@ -74,7 +74,20 @@ export default function ListsIndex({ lists, flash }: Props) {
                     setIsOpen(false);
                     reset();
                 }
-            })
+            });
         }
-    }
+    };
+
+    const handleEdit = (list: List) => {
+        setEditingList(list);
+        setData({
+            title: list.title,
+            description: list.description || '',
+        });
+        setIsOpen(true);
+    };
+
+    const handleDelete = (listId: number) => {
+        destroy(route('lists.destroy', listId));
+    };
 }
