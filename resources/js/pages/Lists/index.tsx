@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -150,10 +150,15 @@ export default function ListsIndex({ lists, flash }: Props) {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {lists.map((list) => (
-    <Card key={list.id} className="hover:bg-accent/50">
+                        <Card key={list.id} className="hover:bg-accent/50 transition-colors">
+                            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                                <CardTitle>
+                                    
+                                </CardTitle>
+                            </CardHeader>
 
-    </Card>
-))}
+                        </Card>
+                    ))}
                 </div>
             </div>
         </AppLayout>
