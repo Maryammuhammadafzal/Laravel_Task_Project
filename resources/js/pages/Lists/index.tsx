@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -133,21 +134,27 @@ export default function ListsIndex({ lists, flash }: Props) {
                             </DialogHeader>
 
                             <form onSubmit={handleSubmit} className="space-y-2">
-                               <div className="space-y-2">
-                                 <Label htmlFor="title">Title</Label>
-                                <Input id="title" value={data.title} onChange={(e) => setData('title', e.target.value)} required />
-                               </div>
-                               <div className="space-y-2">
-                                 <Label htmlFor="description">Description</Label>
-                                <Input id="description" value={data.description} onChange={(e) => setData('description', e.target.value)} required />
-                               </div>
-                               <Button type="submit" disabled={processing}>{editingList? 'Update': 'Create'}</Button>
+                                <div className="space-y-2">
+                                    <Label htmlFor="title">Title</Label>
+                                    <Input id="title" value={data.title} onChange={(e) => setData('title', e.target.value)} required />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label htmlFor="description">Description</Label>
+                                    <Input id="description" value={data.description} onChange={(e) => setData('description', e.target.value)} required />
+                                </div>
+                                <Button type="submit" disabled={processing}>{editingList ? 'Update' : 'Create'}</Button>
                             </form>
                         </DialogContent>
                     </Dialog>
                 </div>
 
-                <div className=""></div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {lists.map((list) => (
+    <Card key={list.id} className="hover:bg-accent/50">
+
+    </Card>
+))}
+                </div>
             </div>
         </AppLayout>
     )
