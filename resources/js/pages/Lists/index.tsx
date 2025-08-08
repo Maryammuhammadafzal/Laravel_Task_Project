@@ -98,7 +98,7 @@ export default function ListsIndex({ lists, flash }: Props) {
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
                 {
                     showToast && (
-                        <div></div>
+                        <div className={`fixed`}></div>
                     )
                 }
             </div>
