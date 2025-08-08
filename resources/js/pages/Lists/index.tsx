@@ -7,7 +7,7 @@ import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Dialog } from "@radix-ui/react-dialog";
-import { CheckCircle2, Plus, XCircle } from "lucide-react";
+import { CheckCircle2, icons, Pencil, Plus, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -152,9 +152,14 @@ export default function ListsIndex({ lists, flash }: Props) {
                     {lists.map((list) => (
                         <Card key={list.id} className="hover:bg-accent/50 transition-colors">
                             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                                <CardTitle>
-                                    
+                                <CardTitle className="text-lg font-medium">
+                                    {list.title}
                                 </CardTitle>
+                                <div className="flex gap-2">
+                                    <Button variant='ghost' size='icon' onClick={() => handleEdit(list)}>
+                                        <Pencil className="h-4 w-4" />
+                                    </Button>
+                                </div>
                             </CardHeader>
 
                         </Card>
