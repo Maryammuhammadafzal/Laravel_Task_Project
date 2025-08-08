@@ -95,7 +95,13 @@ export default function ListsIndex({ lists, flash }: Props) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Lists" />
-            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4"></div>
+            <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
+                {
+                    showToast && (
+                        <div></div>
+                    )
+                }
+            </div>
         </AppLayout>
     )
 }
