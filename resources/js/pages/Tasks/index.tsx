@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, router, useForm } from "@inertiajs/react";
-import { CheckCircle2, List, Plus, Search, XCircle } from "lucide-react";
+import { Calendar, CheckCircle, CheckCircle2, List, Plus, Search, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -276,8 +276,32 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                     <tr key={task.id} className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                                         <td className="p-4 align-middle font-medium">{task.title}</td>
                                         <td className="p-4 align-middle max-w-[200px]">{task.description || "No Description"}</td>
-                                        <td className="p-4 align-middle max-w-[200px]"><div className="flex items-center gap-2"><List className="h-4 w-4 text-muted-foreground" />{task.list.title}</div></td>
-                                        <td className="p-4 align-middle max-w-[200px]"><div className="flex items-center gap-2"><List className="h-4 w-4 text-muted-foreground" />{task.list.title}</div></td>
+                                        <td className="p-4 align-middle"><div className="flex items-center gap-2"><List className="h-4 w-4 text-muted-foreground" />{task.list.title}</div></td>
+                                        <td className="p-4 align-middle">
+                                            {task.due_date ? (
+                                                <div className="flex items-center gap-2">
+                                                    <Calendar className="h-4 w-4 text-muted-foreground" />
+                                                    {new Date(task.due_date).toLocaleDateString()}
+                                                </div>
+                                            ) : (
+                                                <span className="text-muted-foreground">NO Due Date</span>
+                                            )}
+                                        </td>
+                                        <td className="p-4 align-middle">
+                                            {task.is_completed ? (
+                                                <div className="flex items-center gap-2 text-green-500">
+                                                    <CheckCircle className="h-4 w-4" />
+                                                    <span>Completed</span>
+                                                </div>
+                                            ) : (
+                                                <div className="flex items-center gap-2 text-yellow-500">
+                                                    <span>Pending</span>
+                                                </div>
+                                            )}
+                                        </td>
+                                        <td className="p-4 align-middle text-right">
+                                            <div className="flex justify-between gap-2"></div>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
