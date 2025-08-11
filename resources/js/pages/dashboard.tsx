@@ -49,57 +49,57 @@ export default function Dashboard({ stats = {
 
                 </div>
                 <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>
-                    <Card className='bg-gradient-to-br from-blue-500/10 to-blue-600/10 border-blue-500/20'>
+                    <Card>
                         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                            <CardTitle className='text-sm font-medium text-blue-500'>
+                            <CardTitle className='text-sm font-medium'>
                                 Total Lists
                             </CardTitle>
-                            <List className='h-4 w-4 text-blue-500' />
+                            <List className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
-                            <div className='text-2xl font-bold text-blue-500'>{stats.totalLists}</div>
+                            <div className='text-2xl font-bold'>{stats.totalLists}</div>
                             <p className='text-xs text-muted-foreground'>Your Task List</p>
 
                         </CardContent>
                     </Card>
 
-                    <Card className='bg-gradient-to-br from-green-500/10 to-green-600/10 border-green-500/20'>
+                    <Card>
                         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                            <CardTitle className='text-sm font-medium text-blue-500'>
+                            <CardTitle className='text-sm font-medium'>
                                 Total Tasks
                             </CardTitle>
-                            <CheckCircle className='h-4 w-4 text-blue-500' />
+                            <CheckCircle className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
-                            <div className='text-2xl font-bold text-blue-500'>{stats.totalTasks}</div>
+                            <div className='text-2xl font-bold'>{stats.totalTasks}</div>
                             <p className='text-xs text-muted-foreground'>All Your Task</p>
 
                         </CardContent>
                     </Card>
 
-                    <Card className='bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-yellow-500/20'>
+                    <Card>
                         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                            <CardTitle className='text-sm font-medium text-blue-500'>
+                            <CardTitle className='text-sm font-medium'>
                                 Pending Tasks
                             </CardTitle>
-                            <Clock className='h-4 w-4 text-blue-500' />
+                            <Clock className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
-                            <div className='text-2xl font-bold text-blue-500'>{stats.pendingTasks}</div>
+                            <div className='text-2xl font-bold'>{stats.pendingTasks}</div>
                             <p className='text-xs text-muted-foreground'>Task to completed</p>
 
                         </CardContent>
                     </Card>
 
-                    <Card className='bg-gradient-to-br from-yellow-500/10 to-yellow-600/10 border-yellow-500/20'>
+                    <Card>
                         <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-                            <CardTitle className='text-sm font-medium text-blue-500'>
+                            <CardTitle className='text-sm font-medium'>
                                 Completed Tasks
                             </CardTitle>
-                            <AlertCircle className='h-4 w-4 text-blue-500' />
+                            <AlertCircle className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
-                            <div className='text-2xl font-bold text-blue-500'>{stats.completedTasks}</div>
+                            <div className='text-2xl font-bold'>{stats.completedTasks}</div>
                             <p className='text-xs text-muted-foreground'>Task DialogContent</p>
                         </CardContent>
                     </Card>
@@ -107,11 +107,11 @@ export default function Dashboard({ stats = {
 
                 <div className='grid gap-4 md:grid-cols-2'>
                     <Card className='border border-primary/20'>
-                        <CardHeader>
+                        <CardHeader className='flex gap-2 flex-row items-center'>
                             <CardTitle className='text-lg'>
                                 Quick Actions
                             </CardTitle>
-                            <AlertCircle className='h-4 w-4 text-blue-500' />
+                            <AlertCircle className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
                             <div className='grid gap-4'>
@@ -132,17 +132,17 @@ export default function Dashboard({ stats = {
                     </Card>
 
                     <Card className='border border-primary/20'>
-                        <CardHeader>
+                        <CardHeader className='flex gap-2 flex-row items-center'>
                             <CardTitle className='text-lg'>
                                 Recent Activity
                             </CardTitle>
-                            <AlertCircle className='h-4 w-4 text-blue-500' />
+                            <AlertCircle className='h-4 w-4' />
                         </CardHeader>
                         <CardContent>
                             <div className="space-y-4">
                                 <div className="flex items-center gap-4">
                                     <div className='rounded-full bg-primary/10 p-2'>
-                                    <Plus className='h-4 w-4 text-primary'/>
+                                        <Plus className='h-4 w-4 text-primary' />
                                     </div>
 
                                     <div className=''>
