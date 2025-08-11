@@ -3,6 +3,15 @@ import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head } from '@inertiajs/react';
 
+interface Props {
+    stats?: {
+        totalLists: number;
+        totalTasks: number;
+        completedTasks: number;
+        pendingTasks: number;
+    };
+}
+
 const breadcrumbs: BreadcrumbItem[] = [
     {
         title: 'Dashboard',
@@ -10,7 +19,12 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Dashboard() {
+export default function Dashboard({ stats = {
+    totalLists: 0,
+    totalTasks: 0,
+    completedTasks: 0,
+    pendingTasks: 0,
+}}: Props) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Dashboard" />

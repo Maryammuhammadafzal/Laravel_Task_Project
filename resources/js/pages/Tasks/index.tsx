@@ -153,7 +153,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
             search: searchTerm,
             filter: completedFilter,
         }, {
-            preserveState: false,
+            preserveState: true,
             preserveScroll: true
         });
     };
@@ -292,7 +292,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                             )}
                                         </td>
                                         <td className="p-4 align-middle">
-                                            {task.is_completed != false ? (
+                                            {task.is_completed ? (
                                                 <div className="flex items-center gap-2 text-green-500">
                                                     <CheckCircle className="h-4 w-4" />
                                                     <span>Completed</span>
