@@ -26,8 +26,8 @@ class TaskController extends Controller
                     ->orWhere('description', 'like', "%{$search}");
             });
         }
-        if (request()->has("filter") && request("filter") !== "all") {
-            $query->where('is_completed', request('filter') === 'completed');
+        if (request()->has("filter") && request("filter")!=='all') {
+            $query->where('is_completed', request('filter')==='completed');
         }
 
         $tasks = $query->paginate(10);

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, router, useForm } from "@inertiajs/react";
-import { Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, List, Pencil, Plus, Search, Trash2, XCircle } from "lucide-react";
+import { Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, Clock, List, Pencil, Plus, Search, Trash2, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -63,7 +63,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
     const [toastMessage, setToastMessage] = useState('');
     const [toastType, setToastType] = useState<'success' | 'error'>('success');
     const [searchTerm, setSearchTerm] = useState(filters.search);
-    const [completedFilter, setCompletedFilters] = useState<'all' | 'completed' | 'pending'>(filters.filter as 'all' | 'completed' | 'pending');
+    const [completionFilter, setCompletionFilter] = useState<'all' | 'completed' | 'pending'>(filters.filter as 'all' | 'completed' | 'pending');
 
     useEffect(() => {
         if (flash?.success) {
@@ -138,7 +138,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
 
         router.get(route('tasks.index'), {
             search: searchTerm,
-            filter: completedFilter,
+            filter: completionFilter,
         }, {
             preserveState: true,
             preserveScroll: true
@@ -146,12 +146,12 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
     };
 
     const hansleFilterChange = (value: 'all' | 'completed' | 'pending') => {
-        setCompletedFilters(value);
+        setCompletionFilter(value);
         console.log(value);
         
         router.get(route('tasks.index'), {
             search: searchTerm,
-            filter: completedFilter,
+            filter: completionFilter,
         }, {
             preserveState: true,
             preserveScroll: true
@@ -162,7 +162,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
         router.get(route('tasks.index'), {
             page,
             search: searchTerm,
-            filter: completedFilter,
+            filter: completionFilter,
         }, {
             preserveState: true,
             preserveScroll: true
@@ -248,9 +248,9 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                 <div className="flex gap-4 mb-4">
                     <form onSubmit={handleSearch} className="relative flex-1">
                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                        <Input placeholder="Search Task" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10" />
+                        <Input placeholder="Search Task..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10" />
                     </form>
-                    <Select value={completedFilter} onValueChange={hansleFilterChange}>
+                    <Select value={completionFilter} onValueChange={hansleFilterChange}>
                         <SelectTrigger className="w-[180px]" >
                             <SelectValue placeholder='Filter by status' />
                         </SelectTrigger>
@@ -292,13 +292,14 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                             )}
                                         </td>
                                         <td className="p-4 align-middle">
-                                            {task.is_completed ? (
+                                            {task.is_completed == true ? (
                                                 <div className="flex items-center gap-2 text-green-500">
                                                     <CheckCircle className="h-4 w-4" />
                                                     <span>Completed</span>
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center gap-2 text-yellow-500">
+                                                     <Clock className="h-4 w-4" />
                                                     <span>Pending</span>
                                                 </div>
                                             )}

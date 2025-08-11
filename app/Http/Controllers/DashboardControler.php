@@ -22,8 +22,8 @@ class DashboardControler extends Controller
        $stats = [
         'totalLists' => $lists->count(),
         'totalTasks' => $tasks->count(),
-        'completedtaskss' => $tasks->where('is_completed', true)->count(),
-        'pendingTask' => $tasks->where('is_completed', false)->count(),
+        'completedTasks' => $tasks->where('is_completed', true)->count(),
+        'pendingTasks' => $tasks->where('is_completed', false)->count(),
        ];
         return Inertia::render('dashboard', [
             'stats' => $stats,
