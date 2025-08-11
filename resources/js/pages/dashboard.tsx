@@ -4,7 +4,7 @@ import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Head, Link } from '@inertiajs/react';
-import { AlertCircle, CheckCircle, Clock, List } from 'lucide-react';
+import { AlertCircle, CheckCircle, Clock, List, Plus } from 'lucide-react';
 
 interface Props {
     stats?: {
@@ -106,19 +106,51 @@ export default function Dashboard({ stats = {
                 </div>
 
                 <div className='grid gap-4 md:grid-cols-2'>
-                     <Card className='border border-primary/20'>
+                    <Card className='border border-primary/20'>
                         <CardHeader>
                             <CardTitle className='text-lg'>
-                               Quick Actions
+                                Quick Actions
                             </CardTitle>
                             <AlertCircle className='h-4 w-4 text-blue-500' />
                         </CardHeader>
                         <CardContent>
-                          <div className='grid gap-4'>
-                            <Link href={route('list.index')}>
-                            <Button variant='outline' className=',e'></Button>
-                            </Link>
-                          </div>
+                            <div className='grid gap-4'>
+                                <Link href={route('lists.index')}>
+                                    <Button variant='outline' className='w-full justify-start'>
+                                        <List className='h-4 w-4 mr-2' />
+                                        View All
+                                    </Button>
+                                </Link>
+                                <Link href={route('tasks.index')}>
+                                    <Button variant='outline' className='w-full justify-start'>
+                                        <CheckCircle className='h-4 w-4 mr-2' />
+                                        View All
+                                    </Button>
+                                </Link>
+                            </div>
+                        </CardContent>
+                    </Card>
+
+                    <Card className='border border-primary/20'>
+                        <CardHeader>
+                            <CardTitle className='text-lg'>
+                                Recent Activity
+                            </CardTitle>
+                            <AlertCircle className='h-4 w-4 text-blue-500' />
+                        </CardHeader>
+                        <CardContent>
+                            <div className="space-y-4">
+                                <div className="flex items-center gap-4">
+                                    <div className='rounded-full bg-primary/10 p-2'>
+                                    <Plus className='h-4 w-4 text-primary'/>
+                                    </div>
+
+                                    <div className=''>
+                                        <p className='text-sm font-medium'>Welcome to Task Manager</p>
+                                        <p className='text-xs text-muted-foreground'>Get Started by creating your first List or Task</p>
+                                    </div>
+                                </div>
+                            </div>
                         </CardContent>
                     </Card>
                 </div>
