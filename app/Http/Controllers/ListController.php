@@ -13,7 +13,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $lists = TaskList::where('user_id', auth()->guard()->id())->with('tasks')->get();
+        $lists = TaskList::where('user_id', auth()->guard()->id())->get();
         return Inertia::render('Lists/Index', [
             'lists' => $lists,
             'flash' => [
@@ -33,7 +33,7 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request()->validate([
+        $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
@@ -65,14 +65,11 @@ class ListController extends Controller
      */
     public function update(Request $request, TaskList $list)
     {
-         $validated = $request()->validate([
+         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
-        TaskList::create([
-            ...$validated,
-            'user_id' => auth()->guard()->id(),
-        ]);
+        $list->update( $validated);
         return redirect()->route('lists.index')->with('success', 'List Updated Successfully');
   
     }

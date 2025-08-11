@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,7 +7,7 @@ import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, useForm } from "@inertiajs/react";
 import { Dialog } from "@radix-ui/react-dialog";
-import { CheckCircle2, icons, Pencil, Plus, XCircle } from "lucide-react";
+import { CheckCircle2, icons, Pencil, Plus, Trash2, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -77,7 +77,7 @@ export default function ListsIndex({ lists, flash }: Props) {
                 }
             })
         } else {
-            put(route('lists.store'), {
+            post(route('lists.store'), {
                 onSuccess: () => {
                     setIsOpen(false);
                     reset();
@@ -133,21 +133,21 @@ export default function ListsIndex({ lists, flash }: Props) {
                                 </DialogTitle>
                             </DialogHeader>
 
-                            <form onSubmit={handleSubmit} className="space-y-2">
-                                <div className="space-y-2">
+                            <form onSubmit={handleSubmit} className="space-y-4">
+                                <div className="space-y-4">
                                     <Label htmlFor="title">Title</Label>
                                     <Input id="title" value={data.title} onChange={(e) => setData('title', e.target.value)} required />
                                 </div>
-                                <div className="space-y-2">
+                                <div className="space-y-4">
                                     <Label htmlFor="description">Description</Label>
                                     <Input id="description" value={data.description} onChange={(e) => setData('description', e.target.value)} required />
                                 </div>
                                 <Button type="submit" disabled={processing}>{editingList ? 'Update' : 'Create'}</Button>
+
                             </form>
                         </DialogContent>
                     </Dialog>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {lists.map((list) => (
                         <Card key={list.id} className="hover:bg-accent/50 transition-colors">
@@ -155,13 +155,25 @@ export default function ListsIndex({ lists, flash }: Props) {
                                 <CardTitle className="text-lg font-medium">
                                     {list.title}
                                 </CardTitle>
-                                <div className="flex gap-2">
+                                <div className="flex ">
                                     <Button variant='ghost' size='icon' onClick={() => handleEdit(list)}>
-                                        <Pencil className="h-4 w-4" />
+                                        <Pencil className="h-2 w-2" />
+                                    </Button>
+                                    <Button variant='ghost' size='icon' onClick={() => handleDelete(list.id)} className="text-destructive hover:text-destructive/90">
+                                        <Trash2 className="h-2 w-2" />
                                     </Button>
                                 </div>
                             </CardHeader>
-
+                            <CardContent>
+                                <p className="text-sm text-muted-foreground">
+                                    {list.description || "No description"}
+                                </p>
+                                {list.tasks_count !== undefined && (
+                                    <p className="text-sm text-muted-foreground mt-2">
+                                        {list.tasks_count} tasks
+                                    </p>
+                                )}
+                            </CardContent>
                         </Card>
                     ))}
                 </div>
