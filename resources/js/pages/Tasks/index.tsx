@@ -130,7 +130,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
     };
 
     const handleDelete = (taskId: number) => {
-        destroy(route('lists.destroy', taskId));
+        destroy(route('tasks.destroy', taskId));
     };
 
     const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -147,11 +147,13 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
 
     const hansleFilterChange = (value: 'all' | 'completed' | 'pending') => {
         setCompletedFilters(value);
+        console.log(value);
+        
         router.get(route('tasks.index'), {
             search: searchTerm,
             filter: completedFilter,
         }, {
-            preserveState: true,
+            preserveState: false,
             preserveScroll: true
         });
     };
@@ -290,7 +292,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                             )}
                                         </td>
                                         <td className="p-4 align-middle">
-                                            {task.is_completed == true ? (
+                                            {task.is_completed != false ? (
                                                 <div className="flex items-center gap-2 text-green-500">
                                                     <CheckCircle className="h-4 w-4" />
                                                     <span>Completed</span>
