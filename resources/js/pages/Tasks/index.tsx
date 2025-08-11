@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import AppLayout from "@/layouts/app-layout";
 import { BreadcrumbItem } from "@/types";
 import { Head, router, useForm } from "@inertiajs/react";
-import { Calendar, CheckCircle, CheckCircle2, List, Plus, Search, XCircle } from "lucide-react";
+import { Calendar, CheckCircle, CheckCircle2, ChevronLeft, ChevronRight, List, Pencil, Plus, Search, Trash2, XCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 
 
@@ -94,6 +94,8 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
         is_completed: false as boolean,
 
     });
+
+    console.log(data)
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
@@ -189,7 +191,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                         <p className="text-muted-foreground mt-1">Manage Your tasks and stay organized</p>
                     </div>
                     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                        <DialogTrigger asChild>
+                        <DialogTrigger >
                             <Button>
                                 <Plus className="h-4 w-4 mr-2" />
                                 New Task
@@ -288,7 +290,7 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                             )}
                                         </td>
                                         <td className="p-4 align-middle">
-                                            {task.is_completed ? (
+                                            {task.is_completed == true ? (
                                                 <div className="flex items-center gap-2 text-green-500">
                                                     <CheckCircle className="h-4 w-4" />
                                                     <span>Completed</span>
@@ -300,13 +302,44 @@ export default function TasksIndex({ tasks, lists, filters, flash }: Props) {
                                             )}
                                         </td>
                                         <td className="p-4 align-middle text-right">
-                                            <div className="flex justify-between gap-2"></div>
+                                            <div className="flex  gap-2">
+                                                <Button variant='ghost' size='icon' onClick={() => handleEdit(task)}>
+                                                    <Pencil className="h-2 w-2" />
+                                                </Button>
+                                                <Button variant='ghost' size='icon' onClick={() => handleDelete(task.id)} className="text-destructive hover:text-destructive/90">
+                                                    <Trash2 className="h-2 w-2" />
+                                                </Button>
+                                            </div>
                                         </td>
                                     </tr>
                                 ))}
-                            </tbody>
 
+                                {tasks.data.length === 0 && (
+                                    <tr>
+                                        <td colSpan={6} className="p-4 text-center text-muted-foreground">No Tasks Found</td>
+                                    </tr>
+                                )}
+                            </tbody>
                         </table>
+                    </div>
+                </div>
+                {/* Pagination */}
+                <div className="flex items-center justify-between px-2">
+                    <div className="text-sm text-muted-foreground">
+                        Showing {tasks.from} to {tasks.to} of {tasks.total} results
+                    </div>
+                    <div className="flex items-center space-x-2">
+                        <Button variant='ghost' size='icon' onClick={() => handlePageChange(tasks.current_page - 1)} disabled={tasks.current_page === 1}>
+                            <ChevronLeft className="h-4 w-4" />
+                        </Button>
+                        <div className="flex items-center space-x-1">{Array.from({ length: tasks.last_page }, (_, i) => i + 1).map((page) => (
+                            <Button key={page} variant={page === tasks.current_page ? 'default' : 'outline'} size='icon' onClick={() => handlePageChange(page)} disabled={tasks.current_page === 1}>
+                                {page}
+                            </Button>
+                        ))}</div>
+                        <Button variant='outline' size='icon' onClick={() => handlePageChange(tasks.current_page + 1)} disabled={tasks.current_page === tasks.last_page}>
+                            <ChevronRight className="h-4 w-4" />
+                        </Button>
                     </div>
                 </div>
             </div>
